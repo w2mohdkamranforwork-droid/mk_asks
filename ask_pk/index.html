@@ -887,7 +887,7 @@
             <header class="plan-head">
                 <p class="plan-head__greet">Yay, <span class="grad-text" data-name>you</span>! <span class="emoji beat">💖</span></p>
                 <h2 class="plan-head__title" id="planTitle">Let's plan it!&nbsp;<span class="emoji">🎉</span></h2>
-                <ul class="plan-head__tags" aria-label="Date highlights">
+                <ul class="plan-head__tags" aria-label="Outing highlights">
                     <li>🍽️ Good food</li>
                     <li>☕ Cozy vibes</li>
                     <li>💬 Long talks</li>
@@ -934,27 +934,27 @@
                     <span class="step__num" aria-hidden="true">3</span>
                     <h3 class="step__title" id="dateTitle">When are you free?&nbsp;📅</h3>
                 </div>
-                <div class="quick-dates" aria-label="Quick date picks">
+                <div class="quick-dates" aria-label="Quick day picks">
                     <button type="button" class="chip" data-quick="weekend">This weekend 🎉</button>
                     <button type="button" class="chip" data-quick="nextweekend">The one after 😎</button>
                     <button type="button" class="chip" data-quick="surprise">Surprise me 🎲</button>
                 </div>
                 <div class="date-field" id="dateField">
-                    <label for="datePicker">Our date 💕</label>
+                    <label for="datePicker">Our day 💕</label>
                     <input class="date-input" id="datePicker" type="date" required>
                 </div>
                 <div class="selection" id="dateDisplay">
                     <span class="selection__icon" aria-hidden="true">🗓️</span>
                     <span>
                         <strong class="selection__main">Pick a day and the countdown begins ⏳</strong>
-                        <span class="selection__sub">Past dates don't work, the time machine is in repair 😂</span>
+                        <span class="selection__sub">Past days don't work, the time machine is in repair 😂</span>
                     </span>
                 </div>
             </section>
 
             <p class="form-error" id="planError" role="alert"></p>
             <div class="confirm-wrap">
-                <button type="button" id="confirmBtn" class="btn btn--primary btn--block btn--lg">Confirm Our Date! 🥰</button>
+                <button type="button" id="confirmBtn" class="btn btn--primary btn--block btn--lg">Confirm Our Outing! 🥰</button>
             </div>
         </section>
 
@@ -1001,7 +1001,7 @@
             <h2 class="modal__title" id="dashTitle">Owner Dashboard 📋</h2>
 
             <form class="pin-gate" id="pinForm" novalidate>
-                <p>This area is only for the one who planned the date 🕵️ Enter the owner PIN:</p>
+                <p>This area is only for the one who planned this outing 🕵️ Enter the owner PIN:</p>
                 <div class="pin-row">
                     <input class="input" id="ownerPin" type="password" inputmode="numeric" placeholder="Owner PIN" maxlength="32" autocomplete="off" aria-label="Owner PIN">
                     <button type="submit" class="btn btn--primary" id="pinBtn">Unlock 🔓</button>
@@ -1239,7 +1239,7 @@
         window.addEventListener('resize', () => { if ($('screenAsk').classList.contains('is-active')) initialNoPosition(); });
 
         yesBtn.addEventListener('click', () => {
-            withLoader("Yay! Planning our date...", '💖', () => showScreen('screenPlan'));
+            withLoader("Yay! Planning our outing...", '💖', () => showScreen('screenPlan'));
         });
 
         // ---------- Option cards ----------
@@ -1327,7 +1327,7 @@
             if (fromISO(v) < today) {
                 datePicker.value = '';
                 $('dateField').classList.remove('has-value');
-                showError("That day has already passed, pick a future date 😅", 'dateSection');
+                showError("That day has already passed, pick a future day 😅", 'dateSection');
                 return;
             }
             state.date = v;
@@ -1356,7 +1356,7 @@
         $('confirmBtn').addEventListener('click', () => {
             if (!state.location) return showError('Pick a place first! 📍', 'locationSection');
             if (!state.food) return showError('What are we eating? Pick some food! 😋', 'foodSection');
-            if (!datePicker.value) return showError('When are you free? Pick a date! 📅', 'dateSection');
+            if (!datePicker.value) return showError('When are you free? Pick a day! 📅', 'dateSection');
 
             const loc = state.location.id === 'Surprise Me!' ? 'A surprise spot 🎁' : state.location.id;
             $('cfDate').textContent = formatDate(datePicker.value);
@@ -1367,7 +1367,7 @@
 
             saveResponse({ name: friendName, location: loc, food: state.food.id, date: datePicker.value, noAttempts: dodges });
 
-            withLoader('Locking in our date...', '🥰', () => {
+            withLoader('Locking in our outing...', '🥰', () => {
                 showScreen('screenCelebrate');
                 setTimeout(fireConfetti, 300);
             });
